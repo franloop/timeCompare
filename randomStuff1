@@ -1,0 +1,33 @@
+Random stuff 1: Take the performance impact of using of MethodHandles
+
+import java.lang.invoke.MethodHandles;
+// one class needs to have a main() method
+public class HelloWorld
+{
+  // arguments are passed using the text field below this editor
+  public static void main(String[] args)
+  {
+    long startTime = System.currentTimeMillis();
+
+    Class a = MethodHandles.lookup().lookupClass();
+
+    System.out.println("Clase: " + a.getName());
+    
+    long endTime = System.currentTimeMillis() - startTime;  
+    
+    System.out.println("Tiempo que tomó: " + endTime + " ms"); //~4ms
+    
+    
+    
+    long startTime2 = System.currentTimeMillis();
+
+    Class a2 = (new HelloWorld()).getClass();
+
+    System.out.println("Clase: " + a2.getName());
+    
+    long endTime2 = System.currentTimeMillis() - startTime2;  
+    
+    System.out.println("Tiempo que tomó 2: " + endTime2 + " ms"); //~0ms
+    
+  }
+}
